@@ -1,0 +1,45 @@
+# Build artifacts
+build/
+cmake-build-*/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+Testing/
+
+# Test coverage
+*.gcov
+*.gcda
+*.gcno
+
+# Prebuilt binaries
+shell_cat_cli_asan
+test_minimal
+
+# Runtime profile
+.shell_cat_profile
