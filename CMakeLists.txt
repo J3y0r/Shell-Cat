@@ -11,6 +11,7 @@ add_library(${PROJECT_NAME}
     src/renderer.cpp
     src/cat.cpp
     src/profile.cpp
+    src/theme.cpp
 )
 
 target_include_directories(${PROJECT_NAME}

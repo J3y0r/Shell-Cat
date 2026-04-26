@@ -6,6 +6,10 @@ namespace shell_cat {
 struct Profile {
     std::string name;
     std::string created_at;
+    std::string theme_name = "tokyo-night";
+    bool show_hints = true;
+    bool compact_ui = false;
+    int autosave_interval_seconds = 10;
     int feed_count = 0;
     int pet_count = 0;
     int hunger = 20;

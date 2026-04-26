@@ -1,4 +1,5 @@
 #include "shell_cat/profile.hpp"
+#include "shell_cat/theme.hpp"
 #include <fstream>
 #include <iostream>
 #include <ctime>
@@ -34,6 +35,10 @@ bool ProfileManager::load() {
         try {
             if (key == "name") data_.name = val;
             else if (key == "created_at") data_.created_at = val;
+            else if (key == "theme_name") data_.theme_name = val;
+            else if (key == "show_hints") data_.show_hints = (val == "1" || val == "true");
+            else if (key == "compact_ui") data_.compact_ui = (val == "1" || val == "true");
+            else if (key == "autosave_interval_seconds") data_.autosave_interval_seconds = clamp(std::stoi(val), 5, 60);
             else if (key == "feed_count") data_.feed_count = clamp(std::stoi(val), 0, 999999);
             else if (key == "pet_count") data_.pet_count = clamp(std::stoi(val), 0, 999999);
             else if (key == "hunger") data_.hunger = clamp(std::stoi(val), 0, 100);
@@ -49,6 +54,10 @@ bool ProfileManager::load() {
         }
     }
 
+    if (!is_theme_name_valid(data_.theme_name)) {
+        data_.theme_name = default_theme_name();
+    }
+    data_.autosave_interval_seconds = clamp(data_.autosave_interval_seconds, 5, 60);
     if (data_.level < 1) data_.level = 1;
     return true;
 }
@@ -58,6 +67,10 @@ bool ProfileManager::save() const {
     if (!f.is_open()) return false;
     f << "name=" << data_.name << "\n";
     f << "created_at=" << data_.created_at << "\n";
+    f << "theme_name=" << data_.theme_name << "\n";
+    f << "show_hints=" << (data_.show_hints ? 1 : 0) << "\n";
+    f << "compact_ui=" << (data_.compact_ui ? 1 : 0) << "\n";
+    f << "autosave_interval_seconds=" << data_.autosave_interval_seconds << "\n";
     f << "feed_count=" << data_.feed_count << "\n";
     f << "pet_count=" << data_.pet_count << "\n";
     f << "hunger=" << data_.hunger << "\n";
